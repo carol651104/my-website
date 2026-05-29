@@ -13,17 +13,26 @@
     }
 
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #06b6d4;
-      --dark: #111827;
-      --text: #374151;
-      --muted: #6b7280;
-      --light: #f8fafc;
-      --white: #ffffff;
-      --card: rgba(255, 255, 255, 0.82);
-      --border: rgba(255, 255, 255, 0.55);
-      --shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      --bg: #fbf7f8;
+      --surface: rgba(255, 255, 255, 0.78);
+      --surface-strong: rgba(255, 255, 255, 0.92);
+
+      --text: #2d2529;
+      --muted: #766872;
+      --light-muted: #9a8993;
+
+      --rose: #c86b8c;
+      --rose-dark: #9f4569;
+      --rose-soft: #f4d9e4;
+
+      --champagne: #f6eee9;
+      --violet: #8b7cf6;
+      --tech-blue: #6aa9ff;
+
+      --border: rgba(255, 255, 255, 0.68);
+      --line: rgba(200, 107, 140, 0.18);
+      --shadow: 0 24px 60px rgba(77, 47, 62, 0.12);
+      --shadow-soft: 0 14px 34px rgba(77, 47, 62, 0.08);
     }
 
     html {
@@ -32,13 +41,28 @@
 
     body {
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
-      line-height: 1.7;
       color: var(--text);
+      line-height: 1.75;
       background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 35%),
-        radial-gradient(circle at top right, rgba(6, 182, 212, 0.16), transparent 30%),
-        linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+        radial-gradient(circle at 8% 8%, rgba(200, 107, 140, 0.18), transparent 32%),
+        radial-gradient(circle at 88% 12%, rgba(139, 124, 246, 0.13), transparent 28%),
+        radial-gradient(circle at 55% 70%, rgba(106, 169, 255, 0.08), transparent 32%),
+        linear-gradient(180deg, #fffafb 0%, #fbf4f6 48%, #f8f4f5 100%);
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(159, 69, 105, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(159, 69, 105, 0.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 70%);
+      z-index: -1;
     }
 
     a {
@@ -47,24 +71,24 @@
     }
 
     img {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
     }
 
     /* Header */
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.78);
+      z-index: 1000;
+      background: rgba(255, 250, 251, 0.76);
       backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      border-bottom: 1px solid rgba(200, 107, 140, 0.12);
     }
 
     nav {
-      max-width: 1120px;
+      max-width: 1160px;
       margin: auto;
-      padding: 16px 24px;
+      padding: 17px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -72,96 +96,165 @@
 
     .logo {
       font-size: 20px;
-      font-weight: 800;
-      color: var(--dark);
-      letter-spacing: 0.5px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      color: var(--text);
     }
 
     .logo span {
-      color: var(--primary);
+      color: var(--rose-dark);
     }
 
     .nav-links {
       display: flex;
       gap: 24px;
+      align-items: center;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--muted);
     }
 
     .nav-links a {
       position: relative;
-      transition: 0.3s;
+      transition: 0.28s ease;
     }
 
     .nav-links a::after {
       content: "";
       position: absolute;
       left: 0;
-      bottom: -6px;
+      bottom: -7px;
       width: 0;
       height: 2px;
-      background: var(--primary);
-      transition: 0.3s;
+      background: linear-gradient(90deg, var(--rose), var(--violet));
+      transition: 0.28s ease;
     }
 
     .nav-links a:hover {
-      color: var(--primary);
+      color: var(--rose-dark);
     }
 
     .nav-links a:hover::after {
       width: 100%;
     }
 
+    /* Common */
+    section {
+      max-width: 1160px;
+      margin: auto;
+      padding: 72px 24px;
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .section-label {
+      color: var(--rose-dark);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 38px);
+      color: var(--text);
+      line-height: 1.25;
+      letter-spacing: -0.7px;
+    }
+
+    .section-desc {
+      margin-top: 10px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
     /* Hero */
     .hero {
-      max-width: 1120px;
+      max-width: 1160px;
       margin: auto;
-      padding: 86px 24px 56px;
+      padding: 92px 24px 58px;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 52px;
       align-items: center;
     }
 
-    .tag {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 8px 14px;
-      margin-bottom: 22px;
       border-radius: 999px;
-      background: rgba(99, 102, 241, 0.1);
-      color: var(--primary-dark);
+      background: rgba(200, 107, 140, 0.1);
+      border: 1px solid rgba(200, 107, 140, 0.18);
+      color: var(--rose-dark);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--violet));
+      box-shadow: 0 0 16px rgba(200, 107, 140, 0.55);
     }
 
     .hero-text h1 {
-      font-size: clamp(38px, 6vw, 64px);
+      font-size: clamp(40px, 6vw, 66px);
       line-height: 1.12;
-      color: var(--dark);
+      letter-spacing: -1.4px;
+      color: var(--text);
       margin-bottom: 20px;
-      letter-spacing: -1.5px;
     }
 
     .hero-text h1 span {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--rose-dark), var(--rose), var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-text p {
-      max-width: 620px;
-      font-size: 18px;
+      max-width: 640px;
       color: var(--muted);
+      font-size: 18px;
       margin-bottom: 32px;
+    }
+
+    .hero-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .hero-keywords span {
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(200, 107, 140, 0.16);
+      color: var(--rose-dark);
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .buttons {
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 14px;
     }
 
     .btn {
@@ -170,113 +263,138 @@
       justify-content: center;
       padding: 13px 24px;
       border-radius: 999px;
-      font-weight: 700;
-      transition: 0.3s;
-      box-shadow: 0 10px 24px rgba(99, 102, 241, 0.16);
+      font-weight: 800;
+      transition: 0.3s ease;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
+      background: linear-gradient(135deg, var(--rose-dark), var(--rose), var(--violet));
+      box-shadow: 0 16px 34px rgba(200, 107, 140, 0.23);
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(99, 102, 241, 0.28);
+      box-shadow: 0 20px 42px rgba(200, 107, 140, 0.3);
     }
 
     .btn-outline {
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: var(--primary-dark);
-      background: rgba(255, 255, 255, 0.7);
+      color: var(--rose-dark);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(200, 107, 140, 0.25);
     }
 
     .btn-outline:hover {
-      background: var(--white);
       transform: translateY(-3px);
+      background: white;
     }
 
+    /* Profile Card */
     .profile-card {
       position: relative;
-      padding: 30px;
-      border-radius: 32px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
+      border-radius: 34px;
       overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
-    .profile-card::before {
+    .profile-top {
+      height: 150px;
+      background:
+        linear-gradient(135deg, rgba(159, 69, 105, 0.88), rgba(139, 124, 246, 0.65)),
+        url("banner.jpg") center/cover no-repeat;
+      position: relative;
+    }
+
+    .profile-top::after {
       content: "";
       position: absolute;
       inset: 0;
-      height: 128px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 26px 26px;
+      opacity: 0.45;
+    }
+
+    .profile-content {
+      padding: 0 30px 32px;
+      text-align: center;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-top: none;
+      backdrop-filter: blur(18px);
     }
 
     .avatar-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
+      width: 156px;
+      height: 156px;
+      margin: -78px auto 18px;
+      padding: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff, var(--rose-soft));
+      box-shadow: 0 18px 40px rgba(72, 43, 58, 0.16);
+      position: relative;
+      z-index: 2;
     }
 
-    .profile-card img {
-      width: 165px;
-      height: 165px;
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 50%;
-      border: 7px solid white;
-      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+      border: 3px solid white;
     }
 
-    .profile-info {
-      text-align: center;
-      margin-top: 18px;
-    }
-
-    .profile-info h2 {
-      color: var(--dark);
-      font-size: 26px;
+    .profile-content h2 {
+      font-size: 28px;
+      color: var(--text);
       margin-bottom: 6px;
     }
 
-    .profile-info p {
+    .profile-content p {
       color: var(--muted);
       font-size: 15px;
+      margin-bottom: 20px;
     }
 
     .profile-tags {
-      margin-top: 22px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 9px;
     }
 
     .profile-tags span {
       padding: 7px 12px;
       border-radius: 999px;
-      background: rgba(99, 102, 241, 0.1);
-      color: var(--primary-dark);
+      background: rgba(200, 107, 140, 0.1);
+      color: var(--rose-dark);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
+    }
+
+    .profile-note {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(246, 238, 233, 0.82), rgba(244, 217, 228, 0.62));
+      color: var(--muted);
+      font-size: 14px;
     }
 
     /* Banner */
     .banner {
-      max-width: 1120px;
-      margin: 10px auto 30px;
+      max-width: 1160px;
+      margin: 6px auto 32px;
       padding: 0 24px;
     }
 
     .banner-card {
       position: relative;
-      border-radius: 32px;
+      height: 285px;
       overflow: hidden;
+      border-radius: 34px;
       box-shadow: var(--shadow);
-      height: 280px;
     }
 
     .banner-card img {
@@ -289,80 +407,47 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(17, 24, 39, 0.68), rgba(17, 24, 39, 0.08));
+      background:
+        linear-gradient(90deg, rgba(45, 37, 41, 0.72), rgba(45, 37, 41, 0.18)),
+        radial-gradient(circle at 82% 20%, rgba(139, 124, 246, 0.28), transparent 30%);
     }
 
     .banner-text {
       position: absolute;
-      left: 36px;
+      left: 38px;
       bottom: 34px;
       z-index: 2;
       color: white;
     }
 
     .banner-text h2 {
-      font-size: 28px;
+      font-size: clamp(24px, 4vw, 34px);
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
     .banner-text p {
-      max-width: 520px;
-      color: rgba(255, 255, 255, 0.85);
+      max-width: 560px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 16px;
     }
 
-    /* Sections */
-    section {
-      max-width: 1120px;
-      margin: auto;
-      padding: 64px 24px;
-    }
-
-    .section-heading {
-      margin-bottom: 28px;
-    }
-
-    .section-label {
-      color: var(--primary);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 32px;
-      color: var(--dark);
-      letter-spacing: -0.6px;
-    }
-
-    .about {
+    /* About */
+    .about-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.18fr 0.82fr;
       gap: 24px;
     }
 
     .about-card,
-    .highlight-card,
-    .contact-box,
-    .project-card,
-    .skill,
-    .link-card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-      backdrop-filter: blur(14px);
-    }
-
-    .about-card,
     .highlight-card {
-      border-radius: 26px;
-      padding: 28px;
+      border-radius: 30px;
+      padding: 30px;
     }
 
     .about-card p {
       color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 15px;
     }
 
     .about-card p:last-child {
@@ -370,9 +455,9 @@
     }
 
     .highlight-card h3 {
-      color: var(--dark);
+      font-size: 21px;
+      color: var(--text);
       margin-bottom: 16px;
-      font-size: 20px;
     }
 
     .highlight-list {
@@ -381,94 +466,97 @@
     }
 
     .highlight-list div {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.7);
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(200, 107, 140, 0.12);
+      font-weight: 700;
       color: var(--text);
-      font-weight: 600;
     }
 
     /* Skills */
     .skills {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
       gap: 18px;
     }
 
     .skill {
-      padding: 20px;
-      border-radius: 22px;
+      padding: 22px 18px;
+      border-radius: 24px;
       text-align: center;
-      transition: 0.3s;
+      transition: 0.3s ease;
     }
 
     .skill:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 38px rgba(99, 102, 241, 0.14);
+      box-shadow: 0 24px 44px rgba(200, 107, 140, 0.13);
     }
 
     .skill-icon {
-      width: 42px;
-      height: 42px;
-      margin: 0 auto 12px;
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 13px;
+      border-radius: 16px;
       display: grid;
       place-items: center;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15));
-      color: var(--primary-dark);
+      background: linear-gradient(135deg, rgba(200, 107, 140, 0.14), rgba(139, 124, 246, 0.16));
+      color: var(--rose-dark);
       font-weight: 900;
+      border: 1px solid rgba(200, 107, 140, 0.15);
     }
 
     .skill h3 {
-      color: var(--dark);
       font-size: 16px;
-      margin-bottom: 4px;
+      color: var(--text);
+      margin-bottom: 5px;
     }
 
     .skill p {
-      color: var(--muted);
       font-size: 13px;
+      color: var(--muted);
     }
 
     /* Projects */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
       gap: 24px;
     }
 
     .project-card {
-      border-radius: 26px;
+      border-radius: 30px;
       overflow: hidden;
-      transition: 0.3s;
+      transition: 0.35s ease;
     }
 
     .project-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 24px 46px rgba(15, 23, 42, 0.14);
+      box-shadow: 0 28px 54px rgba(77, 47, 62, 0.13);
     }
 
     .project-card img {
       width: 100%;
-      height: 190px;
+      height: 192px;
       object-fit: cover;
     }
 
     .project-content {
-      padding: 22px;
+      padding: 23px;
     }
 
     .project-content .category {
       display: inline-block;
       margin-bottom: 10px;
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 800;
+      color: var(--rose-dark);
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 900;
     }
 
     .project-content h3 {
-      color: var(--dark);
-      font-size: 20px;
+      font-size: 21px;
+      color: var(--text);
       margin-bottom: 8px;
     }
 
@@ -480,96 +568,103 @@
     /* Links */
     .links {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 16px;
     }
 
     .link-card {
-      padding: 20px;
-      border-radius: 20px;
-      font-weight: 800;
-      color: var(--dark);
-      transition: 0.3s;
-    }
-
-    .link-card span {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 500;
+      padding: 21px;
+      border-radius: 24px;
+      transition: 0.3s ease;
     }
 
     .link-card:hover {
       transform: translateY(-5px);
-      color: var(--primary-dark);
+      box-shadow: 0 22px 42px rgba(200, 107, 140, 0.12);
+    }
+
+    .link-card strong {
+      display: block;
+      font-size: 17px;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .link-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     /* Contact */
     .contact-box {
-      border-radius: 26px;
+      border-radius: 30px;
       padding: 30px;
+    }
+
+    .contact-list {
       display: grid;
       gap: 14px;
     }
 
     .contact-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
       padding: 16px 18px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.72);
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      border: 1px solid rgba(200, 107, 140, 0.12);
     }
 
     .contact-item strong {
-      color: var(--dark);
+      color: var(--text);
     }
 
     .contact-item a,
     .contact-item span {
-      color: var(--primary-dark);
-      font-weight: 700;
+      color: var(--rose-dark);
+      font-weight: 800;
       word-break: break-all;
     }
 
     footer {
       text-align: center;
       padding: 34px 20px;
-      color: var(--muted);
+      color: var(--light-muted);
       font-size: 14px;
     }
 
     /* Animation */
-    .fade-in {
+    .fade-up {
       opacity: 0;
       transform: translateY(22px);
-      transition: 0.7s ease;
+      transition: 0.75s ease;
     }
 
-    .fade-in.show {
+    .fade-up.show {
       opacity: 1;
       transform: translateY(0);
     }
 
     /* Responsive */
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       nav {
         flex-direction: column;
-        gap: 14px;
+        gap: 13px;
       }
 
       .nav-links {
-        flex-wrap: wrap;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 16px;
       }
 
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        padding-top: 56px;
+        padding-top: 62px;
       }
 
       .hero-text p {
@@ -577,54 +672,70 @@
         margin-right: auto;
       }
 
+      .hero-keywords,
       .buttons {
         justify-content: center;
       }
 
-      .about {
+      .about-grid {
         grid-template-columns: 1fr;
       }
 
       .banner-card {
-        height: 230px;
+        height: 235px;
       }
 
       .banner-text {
-        left: 24px;
-        right: 24px;
+        left: 26px;
+        right: 26px;
         bottom: 26px;
       }
     }
 
-    @media (max-width: 520px) {
-      .hero {
-        padding-top: 44px;
-      }
-
-      .profile-card {
-        padding: 22px;
-      }
-
-      .profile-card img {
-        width: 140px;
-        height: 140px;
-      }
-
+    @media (max-width: 560px) {
       section {
-        padding: 52px 20px;
+        padding: 56px 20px;
       }
 
-      .section-title {
-        font-size: 28px;
+      .hero {
+        padding: 58px 20px 42px;
+      }
+
+      .hero-text h1 {
+        font-size: 38px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .profile-content {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .avatar-wrap {
+        width: 138px;
+        height: 138px;
+        margin-top: -69px;
       }
 
       .banner-card {
         height: 210px;
-        border-radius: 24px;
+        border-radius: 26px;
       }
 
       .banner-text h2 {
-        font-size: 22px;
+        font-size: 23px;
+      }
+
+      .contact-item {
+        display: block;
+      }
+
+      .contact-item strong {
+        display: block;
+        margin-bottom: 5px;
       }
     }
   </style>
@@ -648,18 +759,25 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-text fade-in">
-        <div class="tag">Electronic Engineering・Portfolio</div>
+      <div class="hero-text fade-up">
+        <div class="hero-badge">Electronic Engineering · AI · Portfolio</div>
 
         <h1>
           你好，我是 <span>何芳妤</span><br />
-          喜歡把想法做成作品。
+          用技術，把想法做成作品。
         </h1>
 
         <p>
-          我專注於電子工程、程式設計與 AI 工具應用。
-          擅長將學習內容整理成實作成果，並持續累積自己的作品集。
+          我具備電子工程背景，正在累積程式設計、AI 工具應用與網頁部署能力。
+          喜歡把學習內容整理成清楚、有質感、能實際展示的成果。
         </p>
+
+        <div class="hero-keywords">
+          <span>電子工程</span>
+          <span>前端網頁</span>
+          <span>AI 工具應用</span>
+          <span>Cloudflare 部署</span>
+        </div>
 
         <div class="buttons">
           <a href="#projects" class="btn btn-primary">查看作品集</a>
@@ -667,154 +785,181 @@
         </div>
       </div>
 
-      <div class="profile-card fade-in">
-        <div class="avatar-wrap">
-          <img src="avatar.jpg" alt="何芳妤個人頭像" />
-        </div>
+      <div class="profile-card fade-up">
+        <div class="profile-top"></div>
 
-        <div class="profile-info">
+        <div class="profile-content">
+          <div class="avatar-wrap">
+            <img src="avatar.jpg" alt="何芳妤個人頭像" />
+          </div>
+
           <h2>何芳妤</h2>
           <p>電子工程學生｜技術學習者｜作品集建立中</p>
-        </div>
 
-        <div class="profile-tags">
-          <span>HTML / CSS</span>
-          <span>JavaScript</span>
-          <span>AI Tools</span>
-          <span>Cloudflare</span>
+          <div class="profile-tags">
+            <span>HTML / CSS</span>
+            <span>JavaScript</span>
+            <span>GitHub</span>
+            <span>Cloudflare</span>
+            <span>AI Tools</span>
+          </div>
+
+          <div class="profile-note">
+            專注於把技術學習轉換成可展示的作品，持續建立自己的個人品牌與專案紀錄。
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Banner -->
-    <div class="banner fade-in">
+    <div class="banner fade-up">
       <div class="banner-card">
         <img src="banner.jpg" alt="網站橫幅圖片" />
+
         <div class="banner-text">
-          <h2>Learning by Building</h2>
-          <p>透過實作累積能力，讓每一次學習都變成看得見的成果。</p>
+          <h2>Elegant Tech Portfolio</h2>
+          <p>
+            以簡約排版、柔和玫瑰色系與科技感細節，呈現專業而有辨識度的個人作品集。
+          </p>
         </div>
       </div>
     </div>
 
     <!-- About -->
-    <section id="about" class="fade-in">
+    <section id="about" class="fade-up">
       <div class="section-heading">
         <div class="section-label">About Me</div>
         <h2 class="section-title">關於我</h2>
+        <p class="section-desc">
+          我希望網站不只是自我介紹，而是能清楚展示我的學習方向、技術能力與實作成果。
+        </p>
       </div>
 
-      <div class="about">
-        <div class="about-card">
+      <div class="about-grid">
+        <div class="about-card glass">
           <p>
-            我是一位電子工程背景的學生，對程式設計、網頁製作、AI 應用與專案實作充滿興趣。
+            我是一位電子工程背景的學生，對程式設計、網頁製作、AI 工具應用與專案實作有高度興趣。
           </p>
+
           <p>
-            我相信最好的學習方式，是把知識整理成能實際運作的作品。
-            這個網站用來展示我的學習成果、專案紀錄與個人品牌。
+            我喜歡把複雜的內容整理成清楚的架構，再透過設計與技術把它呈現出來。
+            對我來說，作品集不只是放作品，而是展現學習能力、整理能力與實作能力的地方。
           </p>
+
           <p>
-            目前我正在持續強化前端網頁、GitHub、Cloudflare Pages 與 AI 工具整合能力。
+            目前我正在持續強化 HTML、CSS、JavaScript、GitHub 與 Cloudflare Pages，
+            也會搭配 AI 工具輔助發想、整理內容與加速開發流程。
           </p>
         </div>
 
-        <div class="highlight-card">
+        <div class="highlight-card glass">
           <h3>我的特色</h3>
 
           <div class="highlight-list">
             <div>具備電子工程與實作基礎</div>
             <div>能快速學習並整理技術內容</div>
-            <div>喜歡將想法轉換成可展示作品</div>
-            <div>重視版面美感與使用者體驗</div>
+            <div>重視作品的結構、質感與可讀性</div>
+            <div>擅長將學習成果轉換成可展示作品</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="fade-in">
+    <section id="skills" class="fade-up">
       <div class="section-heading">
         <div class="section-label">Skills</div>
         <h2 class="section-title">技能列表</h2>
+        <p class="section-desc">
+          目前以網頁製作、作品部署與 AI 工具應用為主，持續擴充技術能力。
+        </p>
       </div>
 
       <div class="skills">
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">H</div>
           <h3>HTML</h3>
-          <p>網頁架構</p>
+          <p>網頁架構與內容設計</p>
         </div>
 
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">C</div>
           <h3>CSS</h3>
-          <p>版面設計</p>
+          <p>版面設計與響應式排版</p>
         </div>
 
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">JS</div>
           <h3>JavaScript</h3>
-          <p>互動功能</p>
+          <p>網頁互動與動態效果</p>
         </div>
 
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">G</div>
           <h3>GitHub</h3>
-          <p>版本管理</p>
+          <p>版本管理與專案紀錄</p>
         </div>
 
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">CF</div>
           <h3>Cloudflare Pages</h3>
-          <p>網站部署</p>
+          <p>靜態網站部署與發布</p>
         </div>
 
-        <div class="skill">
+        <div class="skill glass">
           <div class="skill-icon">AI</div>
           <h3>AI 工具應用</h3>
-          <p>內容與開發輔助</p>
+          <p>內容整理與開發輔助</p>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="fade-in">
+    <section id="projects" class="fade-up">
       <div class="section-heading">
         <div class="section-label">Portfolio</div>
         <h2 class="section-title">作品集</h2>
+        <p class="section-desc">
+          這裡可以放你的課堂作業、網站作品、專題成果、AI 工具應用或其他實作紀錄。
+        </p>
       </div>
 
       <div class="projects">
-        <div class="project-card">
-          <img src="project-01.jpg" alt="個人網站作品" />
+        <div class="project-card glass">
+          <img src="project-01.jpg" alt="個人品牌網站" />
+
           <div class="project-content">
-            <span class="category">Web Design</span>
+            <span class="category">WEB DESIGN</span>
             <h3>個人品牌網站</h3>
             <p>
-              使用 HTML、CSS 與 JavaScript 製作的響應式個人網站，
-              可作為自我介紹與作品展示頁。
+              使用 HTML、CSS 與 JavaScript 製作的響應式網站，
+              用來展示自我介紹、技能與作品集內容。
             </p>
           </div>
         </div>
 
-        <div class="project-card">
-          <img src="project-02.jpg" alt="作品展示頁" />
+        <div class="project-card glass">
+          <img src="project-02.jpg" alt="網站部署作品" />
+
           <div class="project-content">
-            <span class="category">Portfolio</span>
-            <h3>作品展示頁</h3>
+            <span class="category">DEPLOYMENT</span>
+            <h3>Cloudflare 網站部署</h3>
             <p>
-              整理學習成果、專案內容與常用連結，讓作品更有系統地呈現。
+              將靜態網頁透過 GitHub 與 Cloudflare Pages 發布到網路上，
+              完成可公開瀏覽的作品展示頁。
             </p>
           </div>
         </div>
 
-        <div class="project-card">
-          <img src="project-03.jpg" alt="AI 生成網頁" />
+        <div class="project-card glass">
+          <img src="project-03.jpg" alt="AI 輔助製作" />
+
           <div class="project-content">
-            <span class="category">AI Tools</span>
+            <span class="category">AI TOOLS</span>
             <h3>AI 輔助網頁製作</h3>
             <p>
-              透過 AI 協助產生初步架構，再進行版面優化、內容調整與部署。
+              運用 AI 協助規劃網站架構、整理文案與優化版面，
+              再透過人工調整完成更精緻的作品。
             </p>
           </div>
         </div>
@@ -822,53 +967,57 @@
     </section>
 
     <!-- Links -->
-    <section id="links" class="fade-in">
+    <section id="links" class="fade-up">
       <div class="section-heading">
         <div class="section-label">Links</div>
         <h2 class="section-title">常用連結</h2>
       </div>
 
       <div class="links">
-        <a href="https://github.com/carol651104" target="_blank" class="link-card">
-          GitHub
-          <span>查看我的程式與專案</span>
+        <a href="https://github.com/carol651104" target="_blank" class="link-card glass">
+          <strong>GitHub</strong>
+          <span>查看我的程式、專案與學習紀錄</span>
         </a>
 
-        <a href="https://www.linkedin.com/" target="_blank" class="link-card">
-          LinkedIn
-          <span>個人經歷與專業連結</span>
+        <a href="https://www.linkedin.com/in/芳妤-何-11545b412" target="_blank" class="link-card glass">
+          <strong>LinkedIn</strong>
+          <span>查看我的個人經歷與專業資訊</span>
         </a>
 
-        <a href="mailto:carol651104@gmail.com" class="link-card">
-          Email
-          <span>歡迎與我聯絡</span>
+        <a href="mailto:carol651104@gmail.com" class="link-card glass">
+          <strong>Email</strong>
+          <span>歡迎來信與我聯絡</span>
         </a>
       </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="fade-in">
+    <section id="contact" class="fade-up">
       <div class="section-heading">
         <div class="section-label">Contact</div>
         <h2 class="section-title">聯絡方式</h2>
       </div>
 
-      <div class="contact-box">
-        <div class="contact-item">
-          <strong>Email</strong>
-          <a href="mailto:carol651104@gmail.com">carol651104@gmail.com</a>
-        </div>
+      <div class="contact-box glass">
+        <div class="contact-list">
+          <div class="contact-item">
+            <strong>Email</strong>
+            <a href="mailto:carol651104@gmail.com">carol651104@gmail.com</a>
+          </div>
 
-        <div class="contact-item">
-          <strong>GitHub</strong>
-          <a href="https://github.com/carol651104" target="_blank">
-            github.com/carol651104
-          </a>
-        </div>
+          <div class="contact-item">
+            <strong>GitHub</strong>
+            <a href="https://github.com/carol651104" target="_blank">
+              github.com/carol651104
+            </a>
+          </div>
 
-        <div class="contact-item">
-          <strong>LinkedIn</strong>
-          <span>www.linkedin.com/in/芳妤-何-11545b412</span>
+          <div class="contact-item">
+            <strong>LinkedIn</strong>
+            <a href="https://www.linkedin.com/in/芳妤-何-11545b412" target="_blank">
+              linkedin.com/in/芳妤-何-11545b412
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -879,7 +1028,7 @@
   </footer>
 
   <script>
-    const fadeElements = document.querySelectorAll(".fade-in");
+    const fadeElements = document.querySelectorAll(".fade-up");
 
     const observer = new IntersectionObserver(
       entries => {
